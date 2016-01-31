@@ -15,9 +15,9 @@ class Board(object):
     ]
 
     test_cells = [
-        None, None, None,
-        None, None, None,
-        'X', 'X', 'X'
+        None, 'X', 'O',
+        'O', 'X', 'X',
+        'X', 'O', 'O'
     ]
 
     def get_board_ascii(self):
@@ -44,16 +44,16 @@ class Board(object):
         for state in victory_states:
             cells = set(state)
             if len(cells) == 1:
-                # There is only one value in the set of cells: None, X, or Y
+                # There is only one value in the set of cells: None, X, or O
                 value = cells.pop()
-                if value in ['X', 'Y']:
+                if value in ['X', 'O']:
                     return value
 
         return None
 
     def is_a_draw(self):
         """ If there is no winner nor any empty cells, the game is a draw """
-        return not self.get_winner() and None not in self.cells
+        return (not self.get_winner()) and (None not in self.cells)
 
     def get_victory_states(self):
         """
@@ -73,7 +73,7 @@ class Board(object):
 
             # diags
             self.cells[0::4],
-            [self.cells[2], self.cells[3], self.cells[8]]
+            [self.cells[2], self.cells[4], self.cells[8]]
         ]
         return victory_states
 

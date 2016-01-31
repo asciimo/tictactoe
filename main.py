@@ -42,6 +42,7 @@ class Game(object):
                 continue
 
             self.check_for_victory()
+            self.check_for_draw()
             self.apply_computer_move(self.Strategy.move(self.Board))
             self.check_for_victory()
             self.check_for_draw()
